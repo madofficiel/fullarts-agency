@@ -1,0 +1,2087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Full'arts Agency — Creative Intelligence. African Vision. Global Impact.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0F0F12;
+    --dark: #1A1A20;
+    --orange: #FF8A00;
+    --orange-deep: #C25E00;
+    --white: #FFFFFF;
+    --gray: #888;
+    --border: rgba(255,138,0,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    position: fixed;
+    width: 12px; height: 12px;
+    background: var(--orange);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease;
+    mix-blend-mode: normal;
+  }
+  .cursor-follower {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,138,0,0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.25s ease;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 0 60px;
+    height: 80px;
+    background: rgba(15,15,18,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+  nav.scrolled {
+    height: 64px;
+    background: rgba(15,15,18,0.97);
+  }
+
+  /* Left slot */
+  .nav-left {
+    display: flex;
+    align-items: center;
+  }
+
+  /* Center slot — links + lang switcher */
+  .nav-center {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    justify-content: center;
+  }
+
+  /* Right slot — WhatsApp + hamburger pushed to the right */
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: flex-end;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+  .logo-icon {
+    width: 44px; height: 44px;
+    position: relative;
+  }
+  .logo-icon svg { width: 100%; height: 100%; }
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+  .logo-text .brand {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.5px;
+  }
+  .logo-text .brand span { color: var(--orange); }
+  .logo-text .sub {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: var(--gray);
+    margin-top: 3px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: rgba(255,255,255,0.6);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 100%;
+    height: 1px;
+    background: var(--orange);
+    transition: right 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { right: 0; }
+
+  .nav-cta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--orange);
+    color: var(--black);
+    text-decoration: none;
+    padding: 10px 24px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+  .nav-cta:hover {
+    background: #ff9d20;
+    transform: translateY(-1px);
+  }
+  .nav-cta svg { width: 16px; height: 16px; }
+
+  /* LANGUAGE SWITCHER */
+  .lang-switcher {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: rgba(255,255,255,0.6);
+    padding: 8px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    cursor: none;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+  .lang-btn:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+  }
+  .lang-btn svg { width: 14px; height: 14px; transition: transform 0.3s; }
+  .lang-btn.open svg { transform: rotate(180deg); }
+
+  .lang-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: rgba(15,15,18,0.98);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(20px);
+    min-width: 160px;
+    z-index: 500;
+    overflow: hidden;
+  }
+  .lang-dropdown.open { display: block; }
+  .lang-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.55);
+    cursor: none;
+    transition: all 0.2s;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+  }
+  .lang-option:hover { background: rgba(255,138,0,0.06); color: var(--white); }
+  .lang-option.active { color: var(--orange); }
+  .lang-flag { font-size: 16px; line-height: 1; }
+
+  /* RTL support for Arabic */
+  body.lang-ar { direction: rtl; }
+  body.lang-ar .lang-dropdown { right: auto; left: 0; }
+  body.lang-ar .section-label::before { margin-left: 12px; margin-right: 0; }
+  body.lang-ar .portfolio-list-item:hover { transform: translateX(-4px); }
+  body.lang-ar .portfolio-list-item::before { left: auto; right: 0; }
+  body.lang-ar .pli-link svg { transform: rotate(180deg); }
+  body.lang-ar .pli-link:hover svg { transform: rotate(180deg) translateX(4px); }
+  body.lang-ar .btn-secondary svg { transform: rotate(180deg); }
+
+  /* Chinese/Russian font boost */
+  body.lang-zh, body.lang-ru { font-size: 14px; }
+
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 60px 80px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: pulse 6s ease-in-out infinite alternate;
+  }
+  .hero-orb-1 {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,138,0,0.15) 0%, transparent 70%);
+    right: -100px; top: 50%;
+    transform: translateY(-50%);
+  }
+  .hero-orb-2 {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(194,94,0,0.2) 0%, transparent 70%);
+    left: 30%; top: 20%;
+  }
+  .hero-ring {
+    position: absolute;
+    right: -80px; top: 50%;
+    transform: translateY(-50%);
+    width: 600px; height: 600px;
+    opacity: 0.15;
+  }
+  .hero-ring svg { width: 100%; height: 100%; }
+
+  @keyframes pulse {
+    from { transform: translateY(-50%) scale(1); opacity: 0.8; }
+    to { transform: translateY(-50%) scale(1.1); opacity: 1; }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border: 1px solid var(--border);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s ease forwards;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--orange);
+    border-radius: 50%;
+    animation: blink 2s ease-in-out infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero-title {
+    font-size: clamp(48px, 7vw, 96px);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -3px;
+    margin-bottom: 8px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero-title .line2 {
+    color: var(--orange);
+    display: block;
+  }
+  .hero-title .line3 {
+    display: block;
+    font-weight: 300;
+    letter-spacing: -2px;
+    font-style: italic;
+    opacity: 0.7;
+    font-size: 0.55em;
+    margin-top: 8px;
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.55);
+    margin: 32px 0 48px;
+    max-width: 480px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--orange), var(--orange-deep));
+    color: var(--black);
+    text-decoration: none;
+    padding: 16px 36px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+    cursor: none;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px rgba(255,138,0,0.3);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    cursor: none;
+  }
+  .btn-secondary:hover { color: var(--white); }
+  .btn-secondary svg { transition: transform 0.3s; }
+  .btn-secondary:hover svg { transform: translateX(4px); }
+
+  .hero-stats {
+    position: relative;
+    display: flex;
+    gap: 60px;
+    z-index: 1;
+    animation: fadeUp 0.8s 0.4s ease both;
+    margin-top: 64px;
+  }
+  .stat-number {
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--orange);
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+  .stat-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-top: 4px;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    right: 60px; bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    z-index: 1;
+    color: rgba(255,255,255,0.3);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+  }
+  .hero-scroll::before {
+    content: '';
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, var(--orange), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+  @keyframes scrollLine {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* TICKER */
+  .ticker-wrap {
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 0;
+    background: var(--dark);
+  }
+  .ticker {
+    display: flex;
+    gap: 0;
+    animation: ticker 20s linear infinite;
+    white-space: nowrap;
+  }
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 40px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    flex-shrink: 0;
+  }
+  .ticker-item span { color: var(--orange); }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* SECTION COMMON */
+  section { padding: 120px 60px; }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 20px;
+  }
+  .section-label::before {
+    content: '';
+    width: 30px; height: 1px;
+    background: var(--orange);
+  }
+
+  .section-title {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+  }
+  .section-title em {
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* SERVICES */
+  #services { background: var(--black); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+  .service-card {
+    background: var(--dark);
+    padding: 48px 40px;
+    border: 1px solid transparent;
+    transition: all 0.4s;
+    cursor: none;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,138,0,0.05), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .service-card:hover {
+    border-color: var(--border);
+    transform: translateY(-4px);
+  }
+  .service-card:hover::before { opacity: 1; }
+
+  .service-number {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--orange);
+    margin-bottom: 32px;
+    opacity: 0.6;
+  }
+  .service-icon {
+    width: 48px; height: 48px;
+    margin-bottom: 24px;
+    color: var(--orange);
+  }
+  .service-title {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+  .service-desc {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.45);
+  }
+  .service-arrow {
+    position: absolute;
+    bottom: 40px; right: 40px;
+    width: 36px; height: 36px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--orange);
+    transition: all 0.3s;
+  }
+  .service-card:hover .service-arrow {
+    background: var(--orange);
+    color: var(--black);
+    border-color: var(--orange);
+  }
+
+  /* PORTFOLIO LIST */
+  #portfolio { background: var(--dark); }
+  .portfolio-list {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .portfolio-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 40px 48px;
+    background: var(--black);
+    border: 1px solid transparent;
+    border-bottom: 1px solid var(--border);
+    transition: all 0.35s;
+    position: relative;
+    overflow: hidden;
+  }
+  .portfolio-list-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--orange);
+    transform: scaleY(0);
+    transition: transform 0.35s ease;
+  }
+  .portfolio-list-item:hover {
+    background: rgba(26,26,32,0.95);
+    border-color: var(--border);
+    transform: translateX(4px);
+  }
+  .portfolio-list-item:hover::before { transform: scaleY(1); }
+
+  .pli-left {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    flex: 1;
+    min-width: 0;
+  }
+  .pli-num {
+    font-size: 48px;
+    font-weight: 900;
+    color: rgba(255,138,0,0.12);
+    letter-spacing: -3px;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 60px;
+  }
+  .pli-info { flex: 1; min-width: 0; }
+  .pli-cat {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .pli-name {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+    color: var(--white);
+    transition: color 0.3s;
+  }
+  .portfolio-list-item:hover .pli-name { color: var(--orange); }
+  .pli-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.4);
+    max-width: 520px;
+  }
+  .pli-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--orange);
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,138,0,0.3);
+    padding: 12px 24px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: all 0.3s;
+  }
+  .pli-link:hover {
+    background: var(--orange);
+    color: var(--black);
+    border-color: var(--orange);
+  }
+  .pli-link svg { transition: transform 0.3s; }
+  .pli-link:hover svg { transform: translateX(4px); }
+
+  @media (max-width: 768px) {
+    .portfolio-list-item { flex-direction: column; align-items: flex-start; padding: 32px 24px; }
+    .pli-left { gap: 16px; }
+    .pli-num { font-size: 32px; width: 40px; }
+    .pli-name { font-size: 20px; }
+  }
+
+  /* PORTFOLIO (old grid — kept for reference but not used) */
+
+  /* CASE STUDIES */
+  #cases { background: var(--black); }
+  .cases-list {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .case-item {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr auto;
+    align-items: center;
+    gap: 40px;
+    padding: 40px 48px;
+    background: var(--dark);
+    border: 1px solid transparent;
+    transition: all 0.3s;
+    cursor: none;
+  }
+  .case-item:hover {
+    border-color: var(--border);
+    background: rgba(26,26,32,0.8);
+  }
+  .case-num {
+    font-size: 48px;
+    font-weight: 900;
+    color: rgba(255,138,0,0.15);
+    letter-spacing: -3px;
+    line-height: 1;
+  }
+  .case-brand {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+  .case-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .case-tag {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    padding: 4px 10px;
+    border: 1px solid rgba(255,138,0,0.3);
+  }
+  .case-result {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.6;
+  }
+  .case-arrow {
+    width: 44px; height: 44px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--orange);
+    transition: all 0.3s;
+    flex-shrink: 0;
+  }
+  .case-item:hover .case-arrow {
+    background: var(--orange);
+    color: var(--black);
+    border-color: var(--orange);
+  }
+
+  /* CONTACT */
+  #contact {
+    background: var(--dark);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(255,138,0,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .contact-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .contact-title {
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -4px;
+    margin: 20px 0 40px;
+  }
+  .contact-title span { color: var(--orange); }
+  .contact-desc {
+    font-size: 15px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.8;
+    margin-bottom: 48px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .contact-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: linear-gradient(135deg, var(--orange), var(--orange-deep));
+    color: var(--black);
+    text-decoration: none;
+    padding: 20px 48px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+    cursor: none;
+  }
+  .whatsapp-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 30px 60px rgba(255,138,0,0.35);
+  }
+  .whatsapp-btn svg { width: 22px; height: 22px; }
+
+  .email-link {
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    cursor: none;
+  }
+  .email-link:hover { color: var(--white); }
+
+  /* SOCIAL BAR */
+  .social-bar {
+    padding: 60px 60px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    background: var(--black);
+  }
+  .social-links {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  .social-link {
+    width: 44px; height: 44px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    transition: all 0.3s;
+    cursor: none;
+  }
+  .social-link:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+    background: rgba(255,138,0,0.05);
+  }
+  .social-link svg { width: 18px; height: 18px; }
+
+  .footer-copy {
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 2px;
+  }
+
+  /* MOBILE NAV */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: none;
+    background: none;
+    border: none;
+    padding: 8px;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px; height: 2px;
+    background: var(--white);
+    transition: all 0.3s;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    nav { padding: 0 30px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    /* Hide desktop lang switcher on mobile — it lives inside the hamburger menu */
+    #langSwitcher { display: none; }
+    /* Hide WhatsApp CTA text on mobile to save space, keep icon only */
+    .nav-cta span[data-i18n="nav_whatsapp"] { display: none; }
+    .nav-cta { padding: 10px 14px; }
+    section { padding: 80px 30px; }
+    #hero { padding: 120px 30px 80px; }
+    .hero-stats { gap: 40px; margin-top: 48px; }
+    .hero-scroll { display: none; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .case-item { grid-template-columns: 60px 1fr auto; }
+    .case-result { display: none; }
+    .social-bar { padding: 40px 30px; }
+    .contact-btns-row { flex-direction: column; }
+  }
+
+  /* Mobile lang panel inside hamburger menu */
+  .mobile-lang-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    margin-top: 10px;
+  }
+  .mobile-lang-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .mobile-lang-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .mobile-lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: rgba(255,255,255,0.55);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    cursor: none;
+    transition: all 0.2s;
+  }
+  .mobile-lang-btn:hover, .mobile-lang-btn.active {
+    border-color: var(--orange);
+    color: var(--orange);
+    background: rgba(255,138,0,0.06);
+  }
+
+  @media (max-width: 640px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 52px; letter-spacing: -2px; }
+    .hero-stats { flex-direction: column; gap: 20px; margin-top: 40px; }
+    .case-item { grid-template-columns: 1fr auto; }
+    .case-num { display: none; }
+    .contact-title { font-size: 52px; letter-spacing: -2px; }
+  }
+
+  /* GLOW effect on hover for interactive elements */
+  a, button { cursor: none; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="follower"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <!-- LEFT: logo -->
+  <div class="nav-left">
+    <a href="#hero" class="logo">
+      <img src="logo-officiel.png" alt="Full'arts Agency" style="height: 44px; width: auto; display: block;">
+    </a>
+  </div>
+
+  <!-- CENTER: nav links + lang switcher (desktop) -->
+  <div class="nav-center">
+    <ul class="nav-links">
+      <li><a href="#services" data-i18n="nav_services">Services</a></li>
+      <li><a href="#portfolio" data-i18n="nav_portfolio">Portfolio</a></li>
+      <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+
+    <!-- LANGUAGE SWITCHER (desktop only — mobile version lives in hamburger menu) -->
+    <div class="lang-switcher" id="langSwitcher">
+      <button class="lang-btn" id="langBtn" onclick="toggleLangDropdown()">
+        <span id="langFlag">🇬🇧</span>
+        <span id="langCode">EN</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="lang-dropdown" id="langDropdown">
+        <button class="lang-option active" onclick="setLang('en')"><span class="lang-flag">🇬🇧</span> English</button>
+        <button class="lang-option" onclick="setLang('fr')"><span class="lang-flag">🇫🇷</span> Français</button>
+        <button class="lang-option" onclick="setLang('ar')"><span class="lang-flag">🇸🇦</span> العربية</button>
+        <button class="lang-option" onclick="setLang('zh')"><span class="lang-flag">🇨🇳</span> 中文</button>
+        <button class="lang-option" onclick="setLang('ru')"><span class="lang-flag">🇷🇺</span> Русский</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: WhatsApp CTA + hamburger -->
+  <div class="nav-right">
+    <a href="https://wa.me/22940630938" target="_blank" class="nav-cta">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.113 1.524 5.845L0 24l6.294-1.511A11.935 11.935 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.892 0-3.668-.49-5.21-1.348l-.374-.214-3.736.897.936-3.643-.235-.386A9.944 9.944 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+      <span data-i18n="nav_whatsapp">WhatsApp</span>
+    </a>
+
+    <button class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-ring">
+      <svg viewBox="0 0 600 600" fill="none">
+        <circle cx="300" cy="300" r="250" stroke="#FF8A00" stroke-width="1.5" opacity="0.4"/>
+        <circle cx="300" cy="300" r="200" stroke="#FF8A00" stroke-width="0.8" opacity="0.25"/>
+        <circle cx="300" cy="300" r="150" stroke="#FF8A00" stroke-width="0.5" opacity="0.15"/>
+        <circle cx="300" cy="300" r="280" stroke="#C25E00" stroke-width="2" stroke-dasharray="12 8"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-tag" data-i18n="hero_tag">Agence créative · Bénin · Chine · Internationale</div>
+    <h1 class="hero-title">
+      <span data-i18n="hero_title_line1">Intelligence</span><br>
+      <span class="line2" data-i18n="hero_title_line2">Creative.</span>
+      <span class="line3" data-i18n="hero_title_line3">Vision africaine. Impact mondial.</span>
+    </h1>
+    <p class="hero-sub" data-i18n="hero_sub">Full'arts Agency est une agence créative africaine et internationale spécialisée dans le design, la communication visuelle et les solutions créatives basées sur l'intelligence artificielle.</p>
+    <div class="hero-actions">
+      <a href="#portfolio" class="btn-primary">
+        <span data-i18n="hero_btn_portfolio">Voir le portfolio</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#contact" class="btn-secondary">
+        <span data-i18n="hero_btn_project">Démarrer un projet</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number">21+</div>
+        <div class="stat-label" data-i18n="stat_projects">Projets livrés</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">5+</div>
+        <div class="stat-label" data-i18n="stat_years">Années d'expérience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">2</div>
+        <div class="stat-label" data-i18n="stat_countries">Pays actifs</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100%</div>
+        <div class="stat-label" data-i18n="stat_freelance">Freelance</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll" data-i18n="scroll_label">Défilez</div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="ticker-item">Branding <span>✦</span></div>
+    <div class="ticker-item">Design <span>✦</span></div>
+    <div class="ticker-item">Intelligence Artificielle <span>✦</span></div>
+    <div class="ticker-item">Motion Design <span>✦</span></div>
+    <div class="ticker-item">Vision Africaine <span>✦</span></div>
+    <div class="ticker-item">Impact Global <span>✦</span></div>
+    <div class="ticker-item">Communication Visuelle <span>✦</span></div>
+    <div class="ticker-item">Identité de Marque <span>✦</span></div>
+    <!-- duplicate for seamless loop -->
+    <div class="ticker-item">Branding <span>✦</span></div>
+    <div class="ticker-item">Design <span>✦</span></div>
+    <div class="ticker-item">Intelligence Artificielle <span>✦</span></div>
+    <div class="ticker-item">Motion Design <span>✦</span></div>
+    <div class="ticker-item">Vision Africaine <span>✦</span></div>
+    <div class="ticker-item">Impact Global <span>✦</span></div>
+    <div class="ticker-item">Communication Visuelle <span>✦</span></div>
+    <div class="ticker-item">Identité de Marque <span>✦</span></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label" data-i18n="services_label">Nos expertises</div>
+  <h2 class="section-title" data-i18n="services_title">Ce que nous<br><em>créons pour vous</em></h2>
+
+  <div class="services-grid">
+    <!-- Card 1 -->
+    <div class="service-card">
+      <div class="service-number">01</div>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="6" y="6" width="36" height="36" rx="2"/>
+        <path d="M6 18h36M18 6v12"/>
+        <circle cx="32" cy="32" r="6"/>
+        <path d="M28 36l8-8"/>
+      </svg>
+      <div class="service-title" data-i18n="s1_title">Création Visuelle & Branding</div>
+      <div class="service-desc" data-i18n="s1_desc">Identités visuelles fortes, logos mémorables, chartes graphiques complètes. Nous construisons des marques qui marquent les esprits et traversent les cultures.</div>
+      <div class="service-arrow">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="service-card">
+      <div class="service-number">02</div>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="24" cy="20" r="10"/>
+        <path d="M24 30v12M16 42h16"/>
+        <path d="M18 14l-6-6M30 14l6-6"/>
+      </svg>
+      <div class="service-title" data-i18n="s2_title">IA & Innovation Créative</div>
+      <div class="service-desc" data-i18n="s2_desc">Solutions créatives basées sur l'intelligence artificielle. Génération de contenus, automatisation créative, stratégies digitales augmentées par l'IA.</div>
+      <div class="service-arrow">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="service-card">
+      <div class="service-number">03</div>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="4" y="8" width="40" height="28" rx="2"/>
+        <path d="M16 36v4M32 36v4M12 40h24"/>
+        <path d="M14 20h20M14 26h14"/>
+      </svg>
+      <div class="service-title" data-i18n="s3_title">Design Digital & UI/UX</div>
+      <div class="service-desc" data-i18n="s3_desc">Interfaces digitales premium, sites web, applications mobiles. Expériences utilisateurs pensées pour convertir et séduire sur tous les écrans.</div>
+      <div class="service-arrow">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="service-card">
+      <div class="service-number">04</div>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M24 4L4 16v16l20 12 20-12V16L24 4z"/>
+        <path d="M4 16l20 12 20-12M24 28v16"/>
+      </svg>
+      <div class="service-title" data-i18n="s4_title">Motion Design & Vidéo</div>
+      <div class="service-desc" data-i18n="s4_desc">Animations, vidéos corporate, motion graphics percutants. Du storytelling en mouvement qui capte l'attention et raconte votre histoire.</div>
+      <div class="service-arrow">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="service-card">
+      <div class="service-number">05</div>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M8 36c0-8 4-12 8-14s12-2 16 2 6 10 4 16"/>
+        <path d="M6 30c4-2 8-2 12 0s8 2 12 0 8-2 12 0"/>
+        <circle cx="24" cy="20" r="6"/>
+      </svg>
+      <div class="service-title" data-i18n="s5_title">Stratégie & Communication</div>
+      <div class="service-desc" data-i18n="s5_desc">Stratégies de communication 360°, social media, contenu éditorial. Votre message, amplifié intelligemment à travers les bons canaux.</div>
+      <div class="service-arrow">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="service-card">
+      <div class="service-number">06</div>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="4" y="12" width="20" height="14" rx="2"/>
+        <rect x="28" y="6" width="16" height="14" rx="2"/>
+        <rect x="28" y="26" width="16" height="14" rx="2"/>
+        <path d="M24 19h4M24 32v-13l4 0"/>
+      </svg>
+      <div class="service-title" data-i18n="s6_title">Vision Africaine & Globale</div>
+      <div class="service-desc" data-i18n="s6_desc">Expertise unique à l'intersection de l'Afrique et du monde. Des créations qui parlent local et rayonnent international — Bénin, Chine et au-delà.</div>
+      <div class="service-arrow">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-label" data-i18n="portfolio_label">Notre travail</div>
+  <h2 class="section-title" data-i18n="portfolio_title">Quelques créations<br><em>qui parlent d'elles-mêmes</em></h2>
+
+  <div class="portfolio-list">
+
+    <div class="portfolio-list-item">
+      <div class="pli-left">
+        <div class="pli-num">01</div>
+        <div class="pli-info">
+          <div class="pli-cat" data-i18n="p1_cat">Branding · Cosmétique</div>
+          <div class="pli-name">Serenova Beauty</div>
+          <div class="pli-desc" data-i18n="p1_desc">Identité visuelle complète pour une marque cosmétique africaine haut de gamme — logo, charte graphique, packaging et communication digitale.</div>
+        </div>
+      </div>
+      <a href="projets/serenova-beauty/index.html" class="pli-link" target="_blank">
+        <span data-i18n="learn_more">En savoir plus</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="portfolio-list-item">
+      <div class="pli-left">
+        <div class="pli-num">02</div>
+        <div class="pli-info">
+          <div class="pli-cat" data-i18n="p2_cat">Identité · Web · Église</div>
+          <div class="pli-name">ELEVATE Paris</div>
+          <div class="pli-desc" data-i18n="p2_desc">Refonte complète de l'identité visuelle et du site web pour une communauté religieuse contemporaine basée à Paris.</div>
+        </div>
+      </div>
+      <a href="projets/elevate-eglise/index.html" class="pli-link" target="_blank">
+        <span data-i18n="learn_more">En savoir plus</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="portfolio-list-item">
+      <div class="pli-left">
+        <div class="pli-num">03</div>
+        <div class="pli-info">
+          <div class="pli-cat" data-i18n="p3_cat">Branding · Motion · Web</div>
+          <div class="pli-name">KOVA Studio</div>
+          <div class="pli-desc" data-i18n="p3_desc">Création de marque, animations et site web pour un studio créatif émergent — une identité forte et audacieuse qui se démarque.</div>
+        </div>
+      </div>
+      <a href="projets/kova-studio/index.html" class="pli-link" target="_blank">
+        <span data-i18n="learn_more">En savoir plus</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="portfolio-list-item">
+      <div class="pli-left">
+        <div class="pli-num">04</div>
+        <div class="pli-info">
+          <div class="pli-cat" data-i18n="p4_cat">Web · Tourisme · Voyage</div>
+          <div class="pli-name">Zénith Africa</div>
+          <div class="pli-desc" data-i18n="p4_desc">Plateforme web dédiée au tourisme africain — design élégant, UX soignée et contenu éditorial pour valoriser les destinations du continent.</div>
+        </div>
+      </div>
+      <a href="projets/zenith-africa/index.html" class="pli-link" target="_blank">
+        <span data-i18n="learn_more">En savoir plus</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="portfolio-list-item">
+      <div class="pli-left">
+        <div class="pli-num">05</div>
+        <div class="pli-info">
+          <div class="pli-cat" data-i18n="p5_cat">Branding · Studio créatif</div>
+          <div class="pli-name">Kova Studio 2</div>
+          <div class="pli-desc" data-i18n="p5_desc">Studio de design indépendant qui crée des identités visuelles percutantes et des expériences digitales inoubliables.</div>
+        </div>
+      </div>
+      <a href="projets/kova2/index.html" class="pli-link" target="_blank">
+        <span data-i18n="learn_more">En savoir plus</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+
+  </div>
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-bg"></div>
+  <div class="contact-content">
+    <div class="section-label" style="justify-content:center;" data-i18n="contact_label">Parlons de votre projet</div>
+    <h2 class="contact-title" data-i18n="contact_title">Prêt à<br><span>créer</span><br>ensemble?</h2>
+    <p class="contact-desc" data-i18n="contact_desc">Un projet en tête ? Une identité à construire ? Une campagne à lancer ? On est là. Envoyez-nous un message — on répond vite.</p>
+    <div class="contact-actions">
+      <div class="contact-btns-row">
+        <a href="https://wa.me/22940630938" target="_blank" class="whatsapp-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.113 1.524 5.845L0 24l6.294-1.511A11.935 11.935 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.892 0-3.668-.49-5.21-1.348l-.374-.214-3.736.897.936-3.643-.235-.386A9.944 9.944 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/>
+          </svg>
+          <span data-i18n="contact_wa_btn">Démarrer sur WhatsApp</span>
+        </a>
+        <button class="wechat-btn" onclick="openWeChatModal()">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+            <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-7.062-6.122zm-3.518 3.274c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982zm4.703 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z"/>
+          </svg>
+          <span data-i18n="contact_wc_btn">Démarrer sur WeChat</span>
+        </button>
+      </div>
+      <a href="mailto:fullarts29@gmail.com" class="email-link">contact@fullarts.agency</a>
+    </div>
+
+<!-- WECHAT MODAL -->
+<div id="wechat-modal" onclick="closeWeChatModal(event)" style="
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(12px);
+  z-index: 5000;
+  align-items: center;
+  justify-content: center;
+">
+  <div style="
+    background: #1A1A20;
+    border: 1px solid rgba(7,193,96,0.3);
+    padding: 48px 40px 40px;
+    max-width: 380px;
+    width: 90%;
+    position: relative;
+    text-align: center;
+    animation: wechatModalIn 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  " onclick="event.stopPropagation()">
+    <button onclick="closeWeChatModal()" style="
+      position: absolute;
+      top: 16px; right: 16px;
+      background: rgba(255,255,255,0.08);
+      border: none;
+      color: rgba(255,255,255,0.5);
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    " onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">×</button>
+
+    <!-- WeChat logo -->
+    <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:24px;">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="#07C160">
+        <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-7.062-6.122zm-3.518 3.274c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982zm4.703 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z"/>
+      </svg>
+      <span style="font-size:18px; font-weight:800; color:#fff; letter-spacing:-0.5px;">WeChat</span>
+    </div>
+
+    <!-- Zone QR Code -->
+    <div style="
+      width: 220px;
+      height: 220px;
+      margin: 0 auto 20px;
+      background: #fff;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      border: 3px solid #07C160;
+    ">
+      <!-- 
+        =============================================
+        COMMENT AJOUTER TON QR CODE WECHAT :
+        1. Place ton image QR code dans le dossier de ton site
+           (ex: images/wechat-qr.png)
+        2. Remplace la balise <div> ci-dessous par :
+           <img src="images/wechat-qr.png" alt="WeChat QR Code"
+                style="width:100%; height:100%; object-fit:cover;">
+        =============================================
+      -->
+      <div id="wechat-qr-placeholder" style="text-align:center; padding:20px; color:#999;">
+        <img src="images/wechat-qr.png" alt="WeChat QR Code"
+                style="width:100%; height:100%; object-fit:cover;">
+                
+      </div>
+    </div>
+
+    <p style="
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:1px;
+      color:rgba(255,255,255,0.5);
+      margin-bottom:8px;
+      text-transform:uppercase;
+    " data-i18n="wechat_scan">Scannez ou contactez-moi</p>
+
+    <a href="tel:+8617651652202" style="
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(7,193,96,0.1);
+      border: 1px solid rgba(7,193,96,0.3);
+      padding: 10px 24px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+      cursor: pointer;
+    " onmouseover="this.style.background='rgba(7,193,96,0.22)';this.style.borderColor='rgba(7,193,96,0.7)'" onmouseout="this.style.background='rgba(7,193,96,0.1)';this.style.borderColor='rgba(7,193,96,0.3)'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="#07C160">
+        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+      </svg>
+      <span style="font-size:15px; font-weight:700; color:#07C160; letter-spacing:1px;">+86 176 516 52202</span>
+    </a>
+
+    <p style="font-size:11px; color:rgba(255,255,255,0.25); margin-top:16px; letter-spacing:1px;">WeChat</p>
+  </div>
+</div>
+  </div>
+</section>
+
+<!-- SOCIAL BAR / FOOTER -->
+<div class="social-bar">
+  <a href="#hero" class="logo" style="text-decoration:none;">
+    <!-- REMPLACE "logo-officiel.png" par le nom de ton fichier logo -->
+    <img src="logo-officiel.png" alt="Full'arts Agency" style="height: 40px; width: auto; display: block;">
+  </a>
+
+  <div class="social-links">
+    <!-- Instagram 
+    <a href="https://instagram.com/fullarts.agency" target="_blank" class="social-link" title="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="2" y="2" width="20" height="20" rx="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>-->
+    <!-- Facebook 
+    <a href="https://facebook.com/fullarts.agency" target="_blank" class="social-link" title="Facebook">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+      </svg>
+    </a>-->
+    <!-- LinkedIn 
+    <a href="https://linkedin.com/company/fullarts-agency" target="_blank" class="social-link" title="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/>
+        <circle cx="4" cy="4" r="2"/>
+      </svg>
+    </a>-->
+    <!-- TikTok 
+    <a href="https://tiktok.com/@fullarts.agency" target="_blank" class="social-link" title="TikTok">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.13a8.16 8.16 0 0 0 4.77 1.52V7.21a4.85 4.85 0 0 1-1-.52z" opacity="0.7"/>
+      </svg>
+    </a>-->
+    <!-- WhatsApp -->
+    <a href="https://wa.me/22940630938" target="_blank" class="social-link" title="WhatsApp" style="border-color: rgba(37,211,102,0.3);">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" opacity="0.8"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.113 1.524 5.845L0 24l6.294-1.511A11.935 11.935 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.892 0-3.668-.49-5.21-1.348l-.374-.214-3.736.897.936-3.643-.235-.386A9.944 9.944 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/>
+      </svg>
+    </a>
+  </div>
+
+  <div class="footer-copy" data-i18n="footer_copy">© 2026 Full'arts Agency — All rights reserved</div>
+</div>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/22940630938" target="_blank" id="wa-float" style="
+  position: fixed;
+  bottom: 32px; right: 32px;
+  width: 60px; height: 60px;
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  box-shadow: 0 8px 32px rgba(37,211,102,0.4);
+  transition: all 0.3s;
+  cursor: none;
+  text-decoration: none;
+  animation: floatWA 3s ease-in-out infinite;
+">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.113 1.524 5.845L0 24l6.294-1.511A11.935 11.935 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.892 0-3.668-.49-5.21-1.348l-.374-.214-3.736.897.936-3.643-.235-.386A9.944 9.944 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/>
+  </svg>
+</a>
+
+<style>
+@keyframes floatWA {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+#wa-float:hover {
+  transform: scale(1.1) !important;
+  box-shadow: 0 12px 40px rgba(37,211,102,0.5) !important;
+  animation: none !important;
+}
+
+/* WeChat float button */
+#wc-float {
+  position: fixed;
+  bottom: 104px; right: 32px;
+  width: 60px; height: 60px;
+  background: linear-gradient(135deg, #07C160, #05a050);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  box-shadow: 0 8px 32px rgba(7,193,96,0.4);
+  transition: all 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  animation: floatWC 3s ease-in-out infinite;
+  animation-delay: 1.5s;
+  border: none;
+}
+@keyframes floatWC {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+#wc-float:hover {
+  transform: scale(1.1) !important;
+  box-shadow: 0 12px 40px rgba(7,193,96,0.6) !important;
+  animation: none !important;
+}
+
+/* WeChat contact button */
+.contact-btns-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.wechat-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: linear-gradient(135deg, #07C160, #05a050);
+  color: #fff;
+  border: none;
+  padding: 20px 48px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  transition: all 0.3s;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  cursor: pointer;
+}
+.wechat-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 30px 60px rgba(7,193,96,0.35);
+}
+
+/* WeChat modal animation */
+@keyframes wechatModalIn {
+  from { opacity: 0; transform: scale(0.85) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+</style>
+
+<!-- FLOATING WECHAT -->
+<button id="wc-float" onclick="openWeChatModal()" title="WeChat">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-7.062-6.122zm-3.518 3.274c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982zm4.703 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z"/>
+  </svg>
+</button>
+
+<script>
+// WeChat Modal
+function openWeChatModal() {
+  const modal = document.getElementById('wechat-modal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeWeChatModal(e) {
+  if (!e || e.target === document.getElementById('wechat-modal')) {
+    document.getElementById('wechat-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+}
+// Close on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeWeChatModal();
+});
+
+// Custom Cursor
+const cursor = document.getElementById('cursor');
+const follower = document.getElementById('follower');
+let mouseX = 0, mouseY = 0;
+let followerX = 0, followerY = 0;
+
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursor.style.left = mouseX - 6 + 'px';
+  cursor.style.top = mouseY - 6 + 'px';
+});
+
+function animateFollower() {
+  followerX += (mouseX - followerX) * 0.12;
+  followerY += (mouseY - followerY) * 0.12;
+  follower.style.left = followerX - 18 + 'px';
+  follower.style.top = followerY - 18 + 'px';
+  requestAnimationFrame(animateFollower);
+}
+animateFollower();
+
+// Hover effects on cursor
+document.querySelectorAll('a, button, .service-card, .portfolio-list-item, .case-item').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'scale(2)';
+    follower.style.transform = 'scale(1.5)';
+    follower.style.borderColor = 'rgba(255,138,0,0.8)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'scale(1)';
+    follower.style.transform = 'scale(1)';
+    follower.style.borderColor = 'rgba(255,138,0,0.5)';
+  });
+});
+
+// Navbar scroll
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 50) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
+// Mobile menu
+function toggleMenu() {
+  const navLinks = document.querySelector('.nav-links');
+  if (!navLinks) return;
+  if (navLinks.style.display === 'flex') {
+    navLinks.style.display = 'none';
+  } else {
+    navLinks.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:80px;left:0;right:0;background:rgba(15,15,18,0.98);padding:40px;gap:30px;border-bottom:1px solid rgba(255,138,0,0.15);backdrop-filter:blur(20px);z-index:99;';
+
+    // Inject lang panel if not already present
+    if (!navLinks.querySelector('.mobile-lang-panel')) {
+      const t = translations[currentLang] || translations['en'];
+      const panel = document.createElement('div');
+      panel.className = 'mobile-lang-panel';
+      panel.innerHTML = `
+        <div class="mobile-lang-label">Language</div>
+        <div class="mobile-lang-grid">
+          <button class="mobile-lang-btn${currentLang==='en'?' active':''}" onclick="setLang('en');toggleMenu()"><span>🇬🇧</span> EN</button>
+          <button class="mobile-lang-btn${currentLang==='fr'?' active':''}" onclick="setLang('fr');toggleMenu()"><span>🇫🇷</span> FR</button>
+          <button class="mobile-lang-btn${currentLang==='ar'?' active':''}" onclick="setLang('ar');toggleMenu()"><span>🇸🇦</span> AR</button>
+          <button class="mobile-lang-btn${currentLang==='zh'?' active':''}" onclick="setLang('zh');toggleMenu()"><span>🇨🇳</span> ZH</button>
+          <button class="mobile-lang-btn${currentLang==='ru'?' active':''}" onclick="setLang('ru');toggleMenu()"><span>🇷🇺</span> RU</button>
+        </div>`;
+      navLinks.appendChild(panel);
+    }
+  }
+}
+
+// Intersection Observer for scroll animations
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.service-card, .case-item, .portfolio-list-item').forEach((el, i) => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(40px)';
+  el.style.transition = `opacity 0.6s ${i * 0.08}s ease, transform 0.6s ${i * 0.08}s ease`;
+  observer.observe(el);
+});
+
+// Smooth nav links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+    // Close mobile menu
+    const navLinks = document.querySelector('.nav-links');
+    if (navLinks && window.innerWidth <= 1024) navLinks.style.display = 'none';
+  });
+});
+
+// ============================================================
+// MULTILINGUAL SYSTEM — EN (default) | FR | AR | ZH | RU
+// ============================================================
+const translations = {
+  en: {
+    nav_services: 'Services',
+    nav_portfolio: 'Portfolio',
+    nav_contact: 'Contact',
+    nav_whatsapp: 'WhatsApp',
+    hero_tag: 'Creative Agency · Benin · China · International',
+    hero_title_line1: 'Creative',
+    hero_title_line2: 'Intelligence.',
+    hero_title_line3: 'African Vision. Global Impact.',
+    hero_sub: "Full'arts Agency is an African and international creative agency specialising in design, visual communication, and AI-powered creative solutions.",
+    hero_btn_portfolio: 'View Portfolio',
+    hero_btn_project: 'Start a Project',
+    stat_projects: 'Projects Delivered',
+    stat_years: 'Years of Experience',
+    stat_countries: 'Active Countries',
+    stat_freelance: 'Freelance',
+    scroll_label: 'Scroll',
+    services_label: 'Our Expertise',
+    services_title: 'What we\n<em>create for you</em>',
+    s1_title: 'Visual Creation & Branding',
+    s1_desc: 'Strong visual identities, memorable logos, complete brand guidelines. We build brands that leave a mark and cross cultures.',
+    s2_title: 'AI & Creative Innovation',
+    s2_desc: 'AI-powered creative solutions. Content generation, creative automation, digital strategies enhanced by artificial intelligence.',
+    s3_title: 'Digital Design & UI/UX',
+    s3_desc: 'Premium digital interfaces, websites, mobile apps. User experiences designed to convert and captivate across all screens.',
+    s4_title: 'Motion Design & Video',
+    s4_desc: 'Animations, corporate videos, impactful motion graphics. Storytelling in motion that captures attention and tells your story.',
+    s5_title: 'Strategy & Communication',
+    s5_desc: '360° communication strategies, social media, editorial content. Your message, amplified intelligently through the right channels.',
+    s6_title: 'African & Global Vision',
+    s6_desc: 'Unique expertise at the intersection of Africa and the world. Creations that speak locally and shine internationally — Benin, China and beyond.',
+    portfolio_label: 'Our Work',
+    portfolio_title: 'A few creations\n<em>that speak for themselves</em>',
+    p1_cat: 'Branding · Cosmetics',
+    p1_desc: 'Complete visual identity for a premium African cosmetics brand — logo, brand guidelines, packaging and digital communication.',
+    p2_cat: 'Identity · Web · Church',
+    p2_desc: 'Full rebrand of visual identity and website for a contemporary religious community based in Paris.',
+    p3_cat: 'Branding · Motion · Web',
+    p3_desc: 'Brand creation, animations and website for an emerging creative studio — a strong, bold identity that stands out.',
+    p4_cat: 'Web · Tourism · Travel',
+    p4_desc: 'Web platform dedicated to African tourism — elegant design, refined UX and editorial content to showcase the continent\'s destinations.',
+    p5_cat: 'Branding · Creative Studio',
+    p5_desc: 'Independent design studio creating impactful visual identities and unforgettable digital experiences.',
+    learn_more: 'Learn More',
+    contact_label: "Let's talk about your project",
+    contact_title: 'Ready to\n<span>create</span>\ntogether?',
+    contact_desc: 'Have a project in mind? An identity to build? A campaign to launch? We\'re here. Send us a message — we reply fast.',
+    contact_wa_btn: 'Start on WhatsApp',
+    contact_wc_btn: 'Start on WeChat',
+    wechat_scan: 'Scan or contact me',
+    footer_copy: '© 2026 Full\'arts Agency — All rights reserved',
+  },
+  fr: {
+    nav_services: 'Services',
+    nav_portfolio: 'Portfolio',
+    nav_contact: 'Contact',
+    nav_whatsapp: 'WhatsApp',
+    hero_tag: 'Agence créative · Bénin · Chine · Internationale',
+    hero_title_line1: 'Intelligence',
+    hero_title_line2: 'Créative.',
+    hero_title_line3: 'Vision africaine. Impact mondial.',
+    hero_sub: "Full'arts Agency est une agence créative africaine et internationale spécialisée dans le design, la communication visuelle et les solutions créatives basées sur l'intelligence artificielle.",
+    hero_btn_portfolio: 'Voir le portfolio',
+    hero_btn_project: 'Démarrer un projet',
+    stat_projects: 'Projets livrés',
+    stat_years: "Années d'expérience",
+    stat_countries: 'Pays actifs',
+    stat_freelance: 'Freelance',
+    scroll_label: 'Défilez',
+    services_label: 'Nos expertises',
+    services_title: 'Ce que nous\n<em>créons pour vous</em>',
+    s1_title: 'Création Visuelle & Branding',
+    s1_desc: "Identités visuelles fortes, logos mémorables, chartes graphiques complètes. Nous construisons des marques qui marquent les esprits et traversent les cultures.",
+    s2_title: 'IA & Innovation Créative',
+    s2_desc: "Solutions créatives basées sur l'intelligence artificielle. Génération de contenus, automatisation créative, stratégies digitales augmentées par l'IA.",
+    s3_title: 'Design Digital & UI/UX',
+    s3_desc: "Interfaces digitales premium, sites web, applications mobiles. Expériences utilisateurs pensées pour convertir et séduire sur tous les écrans.",
+    s4_title: 'Motion Design & Vidéo',
+    s4_desc: "Animations, vidéos corporate, motion graphics percutants. Du storytelling en mouvement qui capte l'attention et raconte votre histoire.",
+    s5_title: 'Stratégie & Communication',
+    s5_desc: "Stratégies de communication 360°, social media, contenu éditorial. Votre message, amplifié intelligemment à travers les bons canaux.",
+    s6_title: 'Vision Africaine & Globale',
+    s6_desc: "Expertise unique à l'intersection de l'Afrique et du monde. Des créations qui parlent local et rayonnent international — Bénin, Chine et au-delà.",
+    portfolio_label: 'Notre travail',
+    portfolio_title: 'Quelques créations\n<em>qui parlent d\'elles-mêmes</em>',
+    p1_cat: 'Branding · Cosmétique',
+    p1_desc: "Identité visuelle complète pour une marque cosmétique africaine haut de gamme — logo, charte graphique, packaging et communication digitale.",
+    p2_cat: 'Identité · Web · Église',
+    p2_desc: "Refonte complète de l'identité visuelle et du site web pour une communauté religieuse contemporaine basée à Paris.",
+    p3_cat: 'Branding · Motion · Web',
+    p3_desc: "Création de marque, animations et site web pour un studio créatif émergent — une identité forte et audacieuse qui se démarque.",
+    p4_cat: 'Web · Tourisme · Voyage',
+    p4_desc: "Plateforme web dédiée au tourisme africain — design élégant, UX soignée et contenu éditorial pour valoriser les destinations du continent.",
+    p5_cat: 'Branding · Studio créatif',
+    p5_desc: "Studio de design indépendant qui crée des identités visuelles percutantes et des expériences digitales inoubliables.",
+    learn_more: 'En savoir plus',
+    contact_label: 'Parlons de votre projet',
+    contact_title: 'Prêt à\n<span>créer</span>\nensemble?',
+    contact_desc: "Un projet en tête ? Une identité à construire ? Une campagne à lancer ? On est là. Envoyez-nous un message — on répond vite.",
+    contact_wa_btn: 'Démarrer sur WhatsApp',
+    contact_wc_btn: 'Démarrer sur WeChat',
+    wechat_scan: 'Scannez ou contactez-moi',
+    footer_copy: "© 2026 Full'arts Agency — Tous droits réservés",
+  },
+  ar: {
+    nav_services: 'الخدمات',
+    nav_portfolio: 'أعمالنا',
+    nav_contact: 'تواصل',
+    nav_whatsapp: 'واتساب',
+    hero_tag: 'وكالة إبداعية · بنين · الصين · دولية',
+    hero_title_line1: 'ذكاء',
+    hero_title_line2: 'إبداعي.',
+    hero_title_line3: 'رؤية أفريقية. تأثير عالمي.',
+    hero_sub: "Full'arts Agency وكالة إبداعية أفريقية ودولية متخصصة في التصميم والتواصل البصري والحلول الإبداعية المدعومة بالذكاء الاصطناعي.",
+    hero_btn_portfolio: 'عرض الأعمال',
+    hero_btn_project: 'ابدأ مشروعك',
+    stat_projects: 'مشروع منجز',
+    stat_years: 'سنوات خبرة',
+    stat_countries: 'دول نشطة',
+    stat_freelance: 'مستقل',
+    scroll_label: 'تمرير',
+    services_label: 'خبراتنا',
+    services_title: 'ما نبتكره\n<em>من أجلك</em>',
+    s1_title: 'الهوية البصرية والعلامة التجارية',
+    s1_desc: 'هويات بصرية قوية، شعارات لا تُنسى، أدلة علامات تجارية شاملة. نبني علامات تجارية تترك أثراً وتتجاوز الثقافات.',
+    s2_title: 'الذكاء الاصطناعي والابتكار الإبداعي',
+    s2_desc: 'حلول إبداعية مدعومة بالذكاء الاصطناعي. إنشاء المحتوى، أتمتة الإبداع، استراتيجيات رقمية معزّزة بالذكاء الاصطناعي.',
+    s3_title: 'التصميم الرقمي وتجربة المستخدم',
+    s3_desc: 'واجهات رقمية متميزة، مواقع إلكترونية، تطبيقات جوال. تجارب مستخدم مصممة للتحويل والإبهار على كل الشاشات.',
+    s4_title: 'موشن جرافيك وفيديو',
+    s4_desc: 'رسوم متحركة، فيديوهات مؤسسية، موشن جرافيك مؤثر. رواية قصتك بالحركة تجذب الانتباه وتنقل رسالتك.',
+    s5_title: 'الاستراتيجية والتواصل',
+    s5_desc: 'استراتيجيات تواصل 360°، وسائل تواصل اجتماعي، محتوى تحريري. رسالتك، مضخّمة بذكاء عبر القنوات المناسبة.',
+    s6_title: 'رؤية أفريقية وعالمية',
+    s6_desc: 'خبرة فريدة عند تقاطع أفريقيا والعالم. إبداعات تتحدث محلياً وتشع دولياً — بنين والصين وما وراءهما.',
+    portfolio_label: 'أعمالنا',
+    portfolio_title: 'بعض الإبداعات\n<em>التي تتحدث عن نفسها</em>',
+    p1_cat: 'علامة تجارية · مستحضرات تجميل',
+    p1_desc: 'هوية بصرية كاملة لعلامة تجارية أفريقية فاخرة لمستحضرات التجميل — شعار، دليل العلامة، تغليف وتواصل رقمي.',
+    p2_cat: 'هوية · ويب · كنيسة',
+    p2_desc: 'إعادة تصميم كاملة للهوية البصرية والموقع الإلكتروني لمجتمع ديني معاصر في باريس.',
+    p3_cat: 'علامة تجارية · موشن · ويب',
+    p3_desc: 'إنشاء علامة تجارية ورسوم متحركة وموقع إلكتروني لاستوديو إبداعي ناشئ — هوية قوية وجريئة تتميز.',
+    p4_cat: 'ويب · سياحة · سفر',
+    p4_desc: 'منصة ويب مخصصة للسياحة الأفريقية — تصميم أنيق، تجربة مستخدم مصقولة ومحتوى لإبراز الوجهات.',
+    p5_cat: 'علامة تجارية · استوديو إبداعي',
+    p5_desc: 'استوديو تصميم مستقل يبتكر هويات بصرية مؤثرة وتجارب رقمية لا تُنسى.',
+    learn_more: 'اعرف أكثر',
+    contact_label: 'لنتحدث عن مشروعك',
+    contact_title: 'هل أنت مستعد\n<span>للإبداع</span>\nمعاً؟',
+    contact_desc: 'لديك مشروع في ذهنك؟ هوية تريد بناءها؟ حملة تريد إطلاقها؟ نحن هنا. أرسل لنا رسالة — سنرد بسرعة.',
+    contact_wa_btn: 'تواصل عبر واتساب',
+    contact_wc_btn: 'تواصل عبر ويتشات',
+    wechat_scan: 'امسح أو تواصل معي',
+    footer_copy: "© 2026 Full'arts Agency — جميع الحقوق محفوظة",
+  },
+  zh: {
+    nav_services: '服务',
+    nav_portfolio: '作品集',
+    nav_contact: '联系我们',
+    nav_whatsapp: 'WhatsApp',
+    hero_tag: '创意机构 · 贝宁 · 中国 · 国际',
+    hero_title_line1: '创意',
+    hero_title_line2: '智能。',
+    hero_title_line3: '非洲视野。全球影响。',
+    hero_sub: "Full'arts Agency 是一家非洲及国际创意机构，专注于设计、视觉传播及人工智能驱动的创意解决方案。",
+    hero_btn_portfolio: '查看作品集',
+    hero_btn_project: '开启项目',
+    stat_projects: '已交付项目',
+    stat_years: '年经验',
+    stat_countries: '活跃国家',
+    stat_freelance: '自由职业',
+    scroll_label: '向下滚动',
+    services_label: '我们的专长',
+    services_title: '我们为您\n<em>创造的一切</em>',
+    s1_title: '视觉创作与品牌建设',
+    s1_desc: '强大的视觉标识、令人难忘的标志、完整的品牌规范。我们打造穿越文化、深入人心的品牌。',
+    s2_title: '人工智能与创意创新',
+    s2_desc: '基于人工智能的创意解决方案。内容生成、创意自动化、AI赋能的数字营销策略。',
+    s3_title: '数字设计与UI/UX',
+    s3_desc: '高端数字界面、网站、移动应用。为各类屏幕设计能够转化和吸引用户的体验。',
+    s4_title: '动态设计与视频',
+    s4_desc: '动画、企业视频、震撼人心的动态图形。用动态讲故事，抓住注意力，传递您的品牌故事。',
+    s5_title: '策略与传播',
+    s5_desc: '360°传播策略、社交媒体、编辑内容。通过正确渠道智能放大您的信息。',
+    s6_title: '非洲与全球视野',
+    s6_desc: '立足非洲与世界交汇处的独特专业知识。本土发声、国际传播的作品——贝宁、中国及更广阔的世界。',
+    portfolio_label: '我们的作品',
+    portfolio_title: '部分精选作品\n<em>让作品自己说话</em>',
+    p1_cat: '品牌 · 美妆',
+    p1_desc: '为高端非洲美妆品牌打造完整视觉标识——标志、品牌规范、包装及数字传播。',
+    p2_cat: '标识 · 网站 · 教会',
+    p2_desc: '为巴黎当代宗教社区全面重塑视觉标识与网站。',
+    p3_cat: '品牌 · 动效 · 网站',
+    p3_desc: '为新兴创意工作室打造品牌、动画和网站——强大、大胆、脱颖而出的标识。',
+    p4_cat: '网站 · 旅游 · 旅行',
+    p4_desc: '非洲旅游专属网络平台——优雅设计、精致用户体验与编辑内容，彰显大陆旅游目的地价值。',
+    p5_cat: '品牌 · 创意工作室',
+    p5_desc: '独立设计工作室，打造震撼人心的视觉标识与难忘的数字体验。',
+    learn_more: '了解更多',
+    contact_label: '让我们谈谈您的项目',
+    contact_title: '准备好\n<span>共同创作</span>\n了吗？',
+    contact_desc: '脑海中有项目？想打造一个标识？想启动一场营销活动？我们在这里。发送消息——我们快速回复。',
+    contact_wa_btn: '通过WhatsApp联系',
+    contact_wc_btn: '通过微信联系',
+    wechat_scan: '扫描或直接联系我',
+    footer_copy: "© 2026 Full'arts Agency — 保留所有权利",
+  },
+  ru: {
+    nav_services: 'Услуги',
+    nav_portfolio: 'Портфолио',
+    nav_contact: 'Контакт',
+    nav_whatsapp: 'WhatsApp',
+    hero_tag: 'Креативное агентство · Бенин · Китай · Международное',
+    hero_title_line1: 'Творческий',
+    hero_title_line2: 'Интеллект.',
+    hero_title_line3: 'Африканское видение. Глобальное влияние.',
+    hero_sub: "Full'arts Agency — африканское международное креативное агентство, специализирующееся на дизайне, визуальной коммуникации и творческих решениях на основе искусственного интеллекта.",
+    hero_btn_portfolio: 'Смотреть портфолио',
+    hero_btn_project: 'Начать проект',
+    stat_projects: 'Проектов завершено',
+    stat_years: 'Лет опыта',
+    stat_countries: 'Активных стран',
+    stat_freelance: 'Фриланс',
+    scroll_label: 'Листайте',
+    services_label: 'Наши компетенции',
+    services_title: 'Что мы\n<em>создаём для вас</em>',
+    s1_title: 'Визуальное творчество и брендинг',
+    s1_desc: 'Сильные визуальные идентичности, запоминающиеся логотипы, полные брендбуки. Мы создаём бренды, которые оставляют след и пересекают культуры.',
+    s2_title: 'ИИ и творческие инновации',
+    s2_desc: 'Творческие решения на основе ИИ. Генерация контента, творческая автоматизация, цифровые стратегии, усиленные искусственным интеллектом.',
+    s3_title: 'Цифровой дизайн и UI/UX',
+    s3_desc: 'Премиальные цифровые интерфейсы, сайты, мобильные приложения. Пользовательский опыт для конверсии и привлечения на всех экранах.',
+    s4_title: 'Моушн-дизайн и видео',
+    s4_desc: 'Анимации, корпоративные видео, эффектная графика. Сторителлинг в движении, который захватывает внимание и рассказывает вашу историю.',
+    s5_title: 'Стратегия и коммуникации',
+    s5_desc: '360° стратегии коммуникации, социальные сети, редакционный контент. Ваше сообщение, интеллектуально усиленное через правильные каналы.',
+    s6_title: 'Африканское и глобальное видение',
+    s6_desc: 'Уникальная экспертиза на пересечении Африки и мира. Творчество, которое говорит локально и сияет интернационально — Бенин, Китай и не только.',
+    portfolio_label: 'Наши работы',
+    portfolio_title: 'Несколько работ,\n<em>говорящих сами за себя</em>',
+    p1_cat: 'Брендинг · Косметика',
+    p1_desc: 'Полная визуальная идентичность для премиального африканского бренда косметики — логотип, брендбук, упаковка и цифровая коммуникация.',
+    p2_cat: 'Идентичность · Веб · Церковь',
+    p2_desc: 'Полный ребрендинг визуальной идентичности и сайта для современной религиозной общины в Париже.',
+    p3_cat: 'Брендинг · Моушн · Веб',
+    p3_desc: 'Создание бренда, анимаций и сайта для начинающей креативной студии — сильная, смелая идентичность, которая выделяется.',
+    p4_cat: 'Веб · Туризм · Путешествия',
+    p4_desc: 'Веб-платформа для африканского туризма — элегантный дизайн, продуманный UX и редакционный контент для продвижения направлений континента.',
+    p5_cat: 'Брендинг · Креативная студия',
+    p5_desc: 'Независимая дизайн-студия, создающая выразительные визуальные идентичности и незабываемый цифровой опыт.',
+    learn_more: 'Узнать больше',
+    contact_label: 'Поговорим о вашем проекте',
+    contact_title: 'Готовы\n<span>создавать</span>\nвместе?',
+    contact_desc: 'Есть идея для проекта? Хотите создать идентичность? Запустить кампанию? Мы здесь. Напишите нам — ответим быстро.',
+    contact_wa_btn: 'Начать в WhatsApp',
+    contact_wc_btn: 'Начать в WeChat',
+    wechat_scan: 'Сканируйте или свяжитесь',
+    footer_copy: "© 2026 Full'arts Agency — Все права защищены",
+  }
+};
+
+const langMeta = {
+  en: { flag: '🇬🇧', code: 'EN', dir: 'ltr' },
+  fr: { flag: '🇫🇷', code: 'FR', dir: 'ltr' },
+  ar: { flag: '🇸🇦', code: 'AR', dir: 'rtl' },
+  zh: { flag: '🇨🇳', code: 'ZH', dir: 'ltr' },
+  ru: { flag: '🇷🇺', code: 'RU', dir: 'ltr' }
+};
+
+let currentLang = 'en';
+
+function setLang(lang) {
+  if (!translations[lang]) return;
+  currentLang = lang;
+  const t = translations[lang];
+  const meta = langMeta[lang];
+
+  // Update dir + lang attr
+  document.documentElement.setAttribute('lang', lang);
+  document.documentElement.setAttribute('dir', meta.dir);
+  document.body.className = document.body.className.replace(/lang-\w+/g, '').trim();
+  document.body.classList.add('lang-' + lang);
+
+  // Update flag + code in button
+  document.getElementById('langFlag').textContent = meta.flag;
+  document.getElementById('langCode').textContent = meta.code;
+
+  // Mark active option (desktop dropdown)
+  document.querySelectorAll('.lang-option').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('onclick').includes("'" + lang + "'"));
+  });
+
+  // Mark active option (mobile panel, if open)
+  document.querySelectorAll('.mobile-lang-btn').forEach(btn => {
+    const onclick = btn.getAttribute('onclick') || '';
+    btn.classList.toggle('active', onclick.includes("'" + lang + "'"));
+  });
+
+  // Translate all elements with data-i18n
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) {
+      // Use innerHTML for keys that contain HTML tags (<em>, <span>, <br>)
+      const raw = t[key];
+      if (raw.includes('<') || raw.includes('\n')) {
+        el.innerHTML = raw.replace(/\n/g, '<br>');
+      } else {
+        el.textContent = raw;
+      }
+    }
+  });
+
+  // Update page title
+  const titles = {
+    en: "Full'arts Agency — Creative Intelligence. African Vision. Global Impact.",
+    fr: "Full'arts Agency — Intelligence créative. Vision africaine. Impact mondial.",
+    ar: "Full'arts Agency — ذكاء إبداعي. رؤية أفريقية. تأثير عالمي.",
+    zh: "Full'arts Agency — 创意智能。非洲视野。全球影响。",
+    ru: "Full'arts Agency — Творческий интеллект. Африканское видение. Глобальное влияние."
+  };
+  document.title = titles[lang];
+
+  // Close dropdown
+  closeLangDropdown();
+
+  // Save preference
+  try { localStorage.setItem('fa_lang', lang); } catch(e) {}
+}
+
+function toggleLangDropdown() {
+  const btn = document.getElementById('langBtn');
+  const dropdown = document.getElementById('langDropdown');
+  btn.classList.toggle('open');
+  dropdown.classList.toggle('open');
+}
+
+function closeLangDropdown() {
+  document.getElementById('langBtn').classList.remove('open');
+  document.getElementById('langDropdown').classList.remove('open');
+}
+
+// Close dropdown on outside click
+document.addEventListener('click', (e) => {
+  if (!document.getElementById('langSwitcher').contains(e.target)) {
+    closeLangDropdown();
+  }
+});
+
+// Init: load saved preference or default English
+(function initLang() {
+  let saved = 'en';
+  try { saved = localStorage.getItem('fa_lang') || 'en'; } catch(e) {}
+  setLang(saved);
+})();
+</script>
+
+</body>
+</html>
