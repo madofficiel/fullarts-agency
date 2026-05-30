@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOVA — Studio Créatif</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --red: #E02020; --red-dark: #A01515; --white: #F0EEE8; --black: #0A0A0A; --gray: rgba(240,238,232,0.45); --border: rgba(240,238,232,0.1); }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Space Grotesk', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; cursor: crosshair; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 24px 60px; border-bottom: 1px solid var(--border); background: rgba(10,10,10,0.9); backdrop-filter: blur(8px); }
+  .nav-logo { font-family: 'Space Mono', monospace; font-size: 20px; font-weight: 700; letter-spacing: 6px; color: var(--white); text-decoration: none; }
+  .nav-logo span { color: var(--red); }
+  .nav-right { display: flex; align-items: center; gap: 40px; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: var(--gray); text-decoration: none; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.2s; font-family: 'Space Mono', monospace; }
+  .nav-links a:hover { color: var(--red); }
+  .nav-status { display: flex; align-items: center; gap: 8px; }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #22C55E; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+  .status-text { font-family: 'Space Mono', monospace; font-size: 10px; color: #22C55E; letter-spacing: 1.5px; text-transform: uppercase; }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 60px 80px; position: relative; overflow: hidden; }
+  .hero-grid { position: absolute; inset: 0; opacity: 0.03; background-image: linear-gradient(var(--white) 1px, transparent 1px), linear-gradient(90deg, var(--white) 1px, transparent 1px); background-size: 60px 60px; }
+  .hero-noise { position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 30%, rgba(224,32,32,0.06) 0%, transparent 50%); }
+  .hero-counter { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--gray); letter-spacing: 2px; margin-bottom: 40px; }
+  .hero-counter span { color: var(--red); }
+  .hero-title { font-family: 'Space Grotesk', sans-serif; font-size: 110px; font-weight: 700; line-height: 0.88; color: var(--white); position: relative; z-index: 2; }
+  .hero-title .red { color: var(--red); }
+  .hero-title .outline { -webkit-text-stroke: 1px rgba(240,238,232,0.3); color: transparent; }
+  .hero-bottom { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 80px; position: relative; z-index: 2; }
+  .hero-desc { font-size: 15px; line-height: 1.7; color: var(--gray); max-width: 420px; font-weight: 300; }
+  .hero-cta { display: flex; flex-direction: column; align-items: flex-end; gap: 16px; }
+  .btn-red { display: inline-flex; align-items: center; gap: 12px; padding: 18px 48px; background: var(--red); color: var(--white); text-decoration: none; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; transition: all 0.2s; }
+  .btn-red:hover { background: var(--red-dark); transform: translateX(-4px); }
+  .hero-scroll-hint { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--gray); letter-spacing: 3px; text-transform: uppercase; }
+
+  /* MARQUEE */
+  .marquee-wrap { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 20px 0; background: rgba(224,32,32,0.04); }
+  .marquee { display: flex; gap: 0; white-space: nowrap; animation: marquee 20s linear infinite; }
+  .marquee-item { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); padding: 0 40px; border-right: 1px solid var(--border); }
+  .marquee-item.red { color: var(--red); }
+  @keyframes marquee { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  /* WORK */
+  .work { padding: 100px 60px; }
+  .work-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 60px; }
+  .s-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 10px; display: block; }
+  .s-title { font-size: 48px; font-weight: 700; line-height: 1.05; }
+  .work-num { font-family: 'Space Mono', monospace; font-size: 72px; font-weight: 700; color: rgba(240,238,232,0.06); line-height: 1; }
+  .work-list { display: flex; flex-direction: column; gap: 0; }
+  .work-item { display: grid; grid-template-columns: 80px 1fr auto auto; align-items: center; gap: 40px; padding: 32px 0; border-bottom: 1px solid var(--border); transition: background 0.2s; cursor: pointer; position: relative; }
+  .work-item:hover { padding-left: 20px; padding-right: 20px; margin: 0 -20px; background: rgba(224,32,32,0.04); border-color: var(--red); }
+  .work-item:hover .work-item-num { color: var(--red); }
+  .work-item-num { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--gray); }
+  .work-item-name { font-size: 28px; font-weight: 600; }
+  .work-item-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .work-tag { padding: 4px 12px; border: 1px solid var(--border); font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); }
+  .work-item:hover .work-tag { border-color: rgba(224,32,32,0.3); }
+  .work-item-year { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--gray); }
+
+  /* SERVICES */
+  .services { padding: 100px 60px; border-top: 1px solid var(--border); }
+  .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-top: 60px; }
+  .srv-card { background: var(--black); padding: 44px 32px; transition: background 0.2s; cursor: pointer; }
+  .srv-card:hover { background: rgba(224,32,32,0.05); }
+  .srv-num { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--red); letter-spacing: 2px; margin-bottom: 36px; }
+  .srv-icon { width: 40px; height: 40px; margin-bottom: 24px; color: var(--gray); }
+  .srv-title { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+  .srv-desc { font-size: 12px; line-height: 1.8; color: var(--gray); }
+
+  /* PROCESS */
+  .process { padding: 100px 60px; background: rgba(240,238,232,0.02); border-top: 1px solid var(--border); }
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 60px; }
+  .process-step { position: relative; padding-left: 24px; border-left: 2px solid var(--border); transition: border-color 0.3s; }
+  .process-step:hover { border-left-color: var(--red); }
+  .ps-num { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--red); letter-spacing: 2px; margin-bottom: 16px; }
+  .ps-title { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+  .ps-desc { font-size: 12px; line-height: 1.8; color: var(--gray); }
+
+  /* CONTACT */
+  .contact { padding: 120px 60px; text-align: center; }
+  .contact-big { font-family: 'Space Grotesk', sans-serif; font-size: 96px; font-weight: 700; line-height: 0.88; margin-bottom: 48px; }
+  .contact-big .red { color: var(--red); }
+  .contact-big .outline { -webkit-text-stroke: 1px rgba(240,238,232,0.2); color: transparent; }
+  .contact-email { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--gray); letter-spacing: 2px; margin-bottom: 48px; }
+  .contact-email a { color: var(--red); text-decoration: none; }
+
+  /* FOOTER */
+  footer { padding: 40px 60px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .footer-logo { font-family: 'Space Mono', monospace; font-size: 16px; font-weight: 700; letter-spacing: 6px; }
+  .footer-logo span { color: var(--red); }
+  .footer-copy { font-family: 'Space Mono', monospace; font-size: 10px; color: rgba(240,238,232,0.2); letter-spacing: 1.5px; }
+  .footer-links { display: flex; gap: 28px; }
+  .footer-links a { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--gray); text-decoration: none; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--red); }
+
+  @media (max-width: 768px) {
+    nav { padding: 18px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 20px 60px; }
+    .hero-title { font-size: 60px; }
+    .hero-bottom { flex-direction: column; align-items: flex-start; gap: 32px; }
+    .hero-cta { align-items: flex-start; }
+    .work { padding: 60px 20px; }
+    .work-item { grid-template-columns: 50px 1fr; }
+    .work-item-tags, .work-item-year { display: none; }
+    .services { padding: 60px 20px; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .process { padding: 60px 20px; }
+    .process-steps { grid-template-columns: 1fr; }
+    .contact { padding: 80px 20px; }
+    .contact-big { font-size: 54px; }
+    footer { flex-direction: column; gap: 16px; padding: 30px 20px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">KO<span>VA</span></a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#work">Travaux</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-status">
+      <div class="status-dot"></div>
+      <span class="status-text">Dispo</span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-counter">[ <span>001</span> / KOVA STUDIO ]</div>
+  <h1 class="hero-title">
+    NOUS<br>
+    <span class="red">CRÉONS</span><br>
+    <span class="outline">L'IMPACT</span>
+  </h1>
+  <div class="hero-bottom">
+    <p class="hero-desc">Studio créatif indépendant spécialisé en branding, motion design et direction artistique. Nous concevons des identités qui marquent et des expériences qui restent.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-red">Démarrer un projet →</a>
+      <span class="hero-scroll-hint">[ Scroll pour explorer ]</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee">
+    <span class="marquee-item red">Branding</span>
+    <span class="marquee-item">Motion Design</span>
+    <span class="marquee-item red">Direction Artistique</span>
+    <span class="marquee-item">Web Design</span>
+    <span class="marquee-item red">Identité Visuelle</span>
+    <span class="marquee-item">Packaging</span>
+    <span class="marquee-item red">Campagnes</span>
+    <span class="marquee-item">Typographie</span>
+    <span class="marquee-item red">Branding</span>
+    <span class="marquee-item">Motion Design</span>
+    <span class="marquee-item red">Direction Artistique</span>
+    <span class="marquee-item">Web Design</span>
+    <span class="marquee-item red">Identité Visuelle</span>
+    <span class="marquee-item">Packaging</span>
+    <span class="marquee-item red">Campagnes</span>
+    <span class="marquee-item">Typographie</span>
+  </div>
+</div>
+
+<!-- TRAVAUX -->
+<section class="work" id="work">
+  <div class="work-header">
+    <div><span class="s-label">// selected_works</span><h2 class="s-title">Quelques<br>réalisations</h2></div>
+    <div class="work-num">07</div>
+  </div>
+  <div class="work-list">
+    <div class="work-item">
+      <div class="work-item-num">001</div>
+      <div class="work-item-name">Naya — Marque de mode</div>
+      <div class="work-item-tags"><span class="work-tag">Branding</span><span class="work-tag">Packaging</span><span class="work-tag">Web</span></div>
+      <div class="work-item-year">2024</div>
+    </div>
+    <div class="work-item">
+      <div class="work-item-num">002</div>
+      <div class="work-item-name">Pulse — App de fitness</div>
+      <div class="work-item-tags"><span class="work-tag">UI/UX</span><span class="work-tag">Motion</span></div>
+      <div class="work-item-year">2024</div>
+    </div>
+    <div class="work-item">
+      <div class="work-item-num">003</div>
+      <div class="work-item-name">Volta — Startup énergie</div>
+      <div class="work-item-tags"><span class="work-tag">Identité</span><span class="work-tag">Campagne</span><span class="work-tag">Social</span></div>
+      <div class="work-item-year">2023</div>
+    </div>
+    <div class="work-item">
+      <div class="work-item-num">004</div>
+      <div class="work-item-name">Kora Festival — Musique</div>
+      <div class="work-item-tags"><span class="work-tag">Direction Artistique</span><span class="work-tag">Print</span></div>
+      <div class="work-item-year">2023</div>
+    </div>
+    <div class="work-item">
+      <div class="work-item-num">005</div>
+      <div class="work-item-name">Mélia — Restaurant gastronomique</div>
+      <div class="work-item-tags"><span class="work-tag">Branding</span><span class="work-tag">Menus</span><span class="work-tag">Signalétique</span></div>
+      <div class="work-item-year">2023</div>
+    </div>
+    <div class="work-item">
+      <div class="work-item-num">006</div>
+      <div class="work-item-name">Onyx — Label de musique</div>
+      <div class="work-item-tags"><span class="work-tag">Identité</span><span class="work-tag">Motion</span></div>
+      <div class="work-item-year">2022</div>
+    </div>
+    <div class="work-item">
+      <div class="work-item-num">007</div>
+      <div class="work-item-name">Bloc 11 — Coworking Paris</div>
+      <div class="work-item-tags"><span class="work-tag">Branding</span><span class="work-tag">Environnemental</span></div>
+      <div class="work-item-year">2022</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <span class="s-label">// what_we_do</span>
+  <h2 class="s-title">Ce qu'on fait,<br>et comment on le fait</h2>
+  <div class="services-grid">
+    <div class="srv-card">
+      <div class="srv-num">[ 01 ]</div>
+      <svg class="srv-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="32" height="32"/><path d="M4 20 H36 M20 4 V36"/><circle cx="20" cy="20" r="6"/></svg>
+      <div class="srv-title">Branding & Identité</div>
+      <div class="srv-desc">Logos, typographies, chartes graphiques. Des systèmes visuels complets qui fonctionnent partout et durent longtemps.</div>
+    </div>
+    <div class="srv-card">
+      <div class="srv-num">[ 02 ]</div>
+      <svg class="srv-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 32 L20 8 L32 32"/><path d="M12 24 H28"/></svg>
+      <div class="srv-title">Motion Design</div>
+      <div class="srv-desc">Animations de logo, vidéos de présentation, motion graphics pour réseaux sociaux. On donne vie à tes visuels.</div>
+    </div>
+    <div class="srv-card">
+      <div class="srv-num">[ 03 ]</div>
+      <svg class="srv-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="8" width="32" height="22" rx="1"/><path d="M14 30 V36 M26 30 V36 M10 36 H30"/><path d="M12 18 H28 M12 22 H22"/></svg>
+      <div class="srv-title">Web Design</div>
+      <div class="srv-desc">Sites vitrines, landing pages, interfaces web. Design orienté conversion et expérience utilisateur premium.</div>
+    </div>
+    <div class="srv-card">
+      <div class="srv-num">[ 04 ]</div>
+      <svg class="srv-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 28 L20 12 L32 28"/><path d="M14 22 Q20 16 26 22"/><circle cx="20" cy="32" r="3"/></svg>
+      <div class="srv-title">Direction Artistique</div>
+      <div class="srv-desc">Pour les shootings, les campagnes, les événements. On prend la barre créative et on fait de chaque projet un objet de désir.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <span class="s-label">// how_we_work</span>
+  <h2 class="s-title">Notre process,<br>sans friction</h2>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="ps-num">[ ÉTAPE_01 ]</div>
+      <div class="ps-title">Brief & Découverte</div>
+      <div class="ps-desc">On creuse ton projet, ta marque, ta concurrence. On ne commence rien sans avoir compris l'essentiel de ce qui te rend unique.</div>
+    </div>
+    <div class="process-step">
+      <div class="ps-num">[ ÉTAPE_02 ]</div>
+      <div class="ps-title">Stratégie & Concept</div>
+      <div class="ps-desc">On définit un positionnement créatif clair. Une direction artistique, une palette, une voix. On te présente 2 pistes maximum.</div>
+    </div>
+    <div class="process-step">
+      <div class="ps-num">[ ÉTAPE_03 ]</div>
+      <div class="ps-title">Création & Itération</div>
+      <div class="ps-desc">On produit, tu valides. Deux rounds de retouches inclus. On est directs sur ce qui marche et ce qui ne marche pas.</div>
+    </div>
+    <div class="process-step">
+      <div class="ps-num">[ ÉTAPE_04 ]</div>
+      <div class="ps-title">Livraison & Suivi</div>
+      <div class="ps-desc">Fichiers sources, guides d'usage, formats pour tous tes supports. On reste disponibles les 30 jours suivant la livraison.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <h2 class="contact-big">ON<br><span class="red">TRAVAILLE</span><br><span class="outline">ENSEMBLE</span></h2>
+  <p class="contact-email">Contacte-nous → <a href="mailto:hello@kova.studio">hello@kova.studio</a></p>
+  <a href="#" class="btn-red">Lancer un projet →</a>
+</section>
+
+<footer>
+  <div class="footer-logo">KO<span>VA</span></div>
+  <div class="footer-links"><a href="#">Instagram</a><a href="#">Behance</a><a href="#">LinkedIn</a></div>
+  <div class="footer-copy">© 2024 KOVA Studio. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
